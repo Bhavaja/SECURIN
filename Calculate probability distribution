@@ -1,0 +1,35 @@
+def calculate_probability_distribution(die_a, die_b):
+    probability_sums = [0] * 11
+    for face_a in die_a:
+        for face_b in die_b:
+            probability_sums[face_a + face_b - 2] += 1
+    total_combinations = len(die_a) * len(die_b)
+    return [prob / total_combinations for prob in probability_sums]
+
+def undoom_dice(die_a, die_b):
+    original_distribution = calculate_probability_distribution(die_a, die_b)
+
+    new_die_a = [0] * len(die_a)
+    new_die_b = [0] * len(die_b)
+
+    # Calculate new spots for Die A
+    for i in range(len(die_a)):
+        new_die_a[i] = original_distribution[i] * len(die_b) - sum(new_die_b[j] for j in range(len(die_b)))
+
+    # Check if the generated combination satisfies the condition
+    if all(spots <= 4 for spots in new_die_a):
+        return new_die_a, new_die_b
+    else:
+        return None
+
+# Example usage
+die_a = [1, 2, 3, 4, 5, 6]
+die_b = [1, 2, 3, 4, 5, 6]
+
+new_die_a, new_die_b = undoom_dice(die_a, die_b)
+
+if new_die_a is not None:
+    print("New Die A:", new_die_a)
+    print("New Die B:", new_die_b)
+else:
+    print("No valid combination found.")
