@@ -1,0 +1,11 @@
+# Distribution of Combinations
+distribution_matrix = [[0] * 6 for _ in range(6)]
+
+for i in range(6):
+    for j in range(6):
+        distribution_matrix[i][j] = (i + 1) + (j + 1)
+
+# Display the distribution matrix
+print("Distribution Matrix:")
+for row in distribution_matrix:
+    print(row)
