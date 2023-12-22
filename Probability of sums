@@ -1,0 +1,7 @@
+# Probability of Sums
+probability_sums = [row.count(sum_val) / total_combinations for sum_val in range(2, 13)]
+
+# Display the probability of each sum
+print("\nProbability of Sums:")
+for sum_val, prob in zip(range(2, 13), probability_sums):
+    print(f"P(Sum = {sum_val}) = {prob:.2f}")
